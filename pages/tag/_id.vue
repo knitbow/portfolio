@@ -1,4 +1,4 @@
-<!-- pages/index.vue -->
+<!-- ここから追加 -->
 <template>
   <div>
     <Item
@@ -8,23 +8,21 @@
     />
   </div>
 </template>
-
+<!-- ここまで追加 -->
 <script>
-
-    import {createClient} from '../plugins/contentful.js'
-    import Item from "../components/Item";
+    import {createClient} from '~/plugins/contentful.js'
+    import Item from "../../components/Item";
 
     const client = createClient()
     export default {
         components: {Item},
-        // ここまで追加
-
-        asyncData() {
+        asyncData(params) {
             return Promise.all([
                 client.getEntries({
                     'content_type': 'work',
+                    'fields.tags.sys.id': params.params.id,
                     order: '-sys.createdAt'
-                })
+                }),
             ]).then(([works]) => {
                 return {
                     works: works.items
