@@ -2,7 +2,12 @@
 const config = require('./.contentful.json')
 const contentful = require('contentful')
 // ここまで追加
-
+// ここから追加
+const client = contentful.createClient({
+  space: config.CTF_SPACE_ID,
+  accessToken: config.CTF_CDA_ACCESS_TOKEN
+})
+// ここまで追加
 export default {
   mode: 'universal',
   // ここから追加
