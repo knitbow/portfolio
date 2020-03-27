@@ -1,29 +1,37 @@
 <template>
-  <div class="w-full my-3 py-2 bg-white overflow-hidden shadow-lg">
-    <nuxt-link :to=" '/category/'+work.fields.category.sys.id ">
-      <div class="absolute bg-white py-1 px-3 rounded shadow mt-1 ml-1 text-sm">
-        {{ work.fields.category.fields.name }}
-      </div>
-    </nuxt-link>
-    <div
-      class="mb-3 w-full h-64 bg-center bg-cover"
-      :style=" 'background-image: url(' + work.fields.image.fields.file.url + ')' "
-    ></div>
-    <nuxt-link :to=" '/work/' + work.fields.slug ">
-      <h3 class="ml-3 font-bold">{{ work.fields.title }}</h3>
-    </nuxt-link>
-    <h4 class="ml-3 my-2 text-xs">{{ work.fields.subtitle }}</h4>
-    <div class="flex ml-2">
 
-      <li
-        v-for="tag in work.fields.tags"
-        :key="tag.sys.id"
-        class="list-none text-xs m-1 bg-gray-200 p-1 rounded cursor-pointer"
-        @click="$router.push('/tag/'+tag.sys.id)">
-        {{ tag.fields.name }}
-      </li>
-    </div>
-  </div>
+  <v-card>
+    <v-img
+      class="white--text align-start"
+      :src="work.fields.image.fields.file.url"
+      height="200px"
+    >
+      <v-btn
+        class="btn-field"
+        :to=" '/category/'+work.fields.category.sys.id "
+        small
+      >{{work.fields.category.fields.name}}
+      </v-btn>
+    </v-img>
+    <v-card-title primary-title>
+      <div>
+        <nuxt-link :to=" '/work/' + work.fields.slug ">
+          <span class="black--text">{{ work.fields.title }}</span>
+        </nuxt-link>
+      </div>
+    </v-card-title>
+    <v-card-subtitle primary-title>
+      <div>
+        <span class="grey--text">{{ work.fields.subTitle }}</span>
+      </div>
+    </v-card-subtitle>
+
+    <v-btn x-small v-for="tag in work.fields.tags"
+           :key="tag.sys.id" class="tag-field">{{ tag.fields.name }}
+    </v-btn>
+
+  </v-card>
+
 </template>
 <script>
     export default {
@@ -31,3 +39,17 @@
         props: ['work']
     }
 </script>
+
+<style lang="scss" scoped>
+  a {
+    text-decoration: none;
+  }
+
+  .tag-field {
+    margin: 5px;
+  }
+
+  .btn-field {
+    margin: 10px;
+  }
+</style>

@@ -1,6 +1,6 @@
 # jam_portfolio
 
-> My awe-inspiring Nuxt.js project
+> My beautiful Nuxt.js project
 
 ## Build Setup
 

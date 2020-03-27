@@ -1,67 +1,77 @@
 <template>
-  <div class="font-main flex flex-wrap justify-around">
-    <header class="w-64 h-64">
-      <div class="w-64 mt-24 ml-2 relative md:fixed">
-        <div class="flex">
-          <div class="bg-center bg-cover w-16 h-16 mr-2 rounded-full shadow photo"></div>
-          <div>
-            <h1 class="font-bold">Kyo Yasuhisa</h1>
-            <p class="text-xs text-justify">フロントエンドエンジニアのKyo Yasuhisaです。Vue.js,
-              Nuxt.jsが大好きです。Pythonも使います。ご依頼はDMからどうぞ。</p>
-          </div>
-        </div>
-        <div class="flex justify-around mt-5 text-xs">
-          <nuxt-link to="/">
-            <button>
-              <fa-layers full-width class="fa-2x block mx-auto mb-1">
-                <fa :icon="faCode"/>
-              </fa-layers>
-              Works
-            </button>
-          </nuxt-link>
-          <a href="http://" target="_blank" rel="noopener noreferrer">
-            <button>
-              <fa-layers full-width class="fa-2x block mx-auto mb-1">
-                <fa :icon="faTwitter"/>
-              </fa-layers>
-              Twitter
-            </button>
-          </a>
-          <a href="https://github.com/si-zerodarkthirty" target="_blank" rel="noopener noreferrer">
-            <button>
-              <fa-layers full-width class="fa-2x block mx-auto mb-1">
-                <fa :icon="faGithub"/>
-              </fa-layers>
-              GitHub
-            </button>
-          </a>
-        </div>
-        <input type="text" placeholder="Keywords" class="bg-gray-300 p-2 text-xs rounded w-full mt-5 focus:outline-none"
-               v-model="keyword" @keypress.enter="$router.push('/search/'+keyword)">
+  <v-app dark>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+    >
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar
+      :clipped-left="clipped"
+      fixed
+      app
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
-      </div>
-    </header>
-    <main class="mt-10">
-      <nuxt/>
-    </main>
-  </div>
+      <v-toolbar-title v-text="title" />
+      <v-spacer />
+    </v-app-bar>
+    <v-content>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-content>
+    <v-footer
+      :fixed="fixed"
+      app
+    >
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-    import {faGithub, faTwitter} from '@fortawesome/free-brands-svg-icons'
-    import {faCode} from '@fortawesome/free-solid-svg-icons'
-
-    export default {
-        computed: {
-            faTwitter() {
-                return faTwitter
-            },
-            faGithub() {
-                return faGithub
-            },
-            faCode() {
-                return faCode
-            }
+export default {
+  data () {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      items: [
+        {
+          icon: 'mdi-apps',
+          title: 'home',
+          to: '/'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Inspire',
+          to: '/inspire'
         }
+      ],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'Portfolio'
     }
+  }
+}
 </script>

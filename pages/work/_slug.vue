@@ -1,39 +1,31 @@
 <template>
   <div>
-    <div
-      class="w-full h-64 my-6 bg-cover bg-center shadow-lg"
-      :style=" 'background-image: url(' + work.fields.image.fields.file.url + ')' "
-    ></div>
-    <nuxt-link :to=" '/category/'+work.fields.category.sys.id ">
-      <p class="text-center">{{ work.fields.category.fields.name }}</p>
-    </nuxt-link>
-    <h1 class="text-center text-4xl">{{ work.fields.title }}</h1>
-    <p class="text-center text-sm">{{ work.fields.subtitle }}</p>
-    <div class="flex justify-center mb-5">
-      <li
-        v-for="tag in work.fields.tag"
-        :key="tag.sys.id"
-        class="list-none text-xs m-1 bg-gray-200 p-1 rounded"
-        @click="$router.push('/tag/'+tag.sys.id)"
+    <v-card>
+
+      <v-img
+        :src="work.fields.image.fields.file.url"
+        height="400px"
       >
-        {{ tag.fields.name }}
-      </li>
-      <div class="my-10">
-        <p v-if="work.fields.url" class="text-xs">
-          <fa-layers full-width class="mr-1">
-            <fa :icon="faLink"/>
-          </fa-layers>
-          {{ work.fields.url }}
-        </p>
-        <p v-if="work.fields.gitHub" class="text-xs">
-          <fa-layers full-width class="mr-1">
-            <fa :icon="faGithub"/>
-          </fa-layers>
-          {{ work.fields.gitHub }}
-        </p>
-      </div>
-      <div class="content" v-html="$md.render(work.fields.content)"></div>
-    </div>
+      </v-img>
+      <v-card-title primary-title>
+        <div>
+          <nuxt-link :to=" '/category/'+work.fields.category.sys.id ">
+            <div class="headline">{{ work.fields.category.fields.name
+              }}
+            </div>
+          </nuxt-link>
+          <span class="grey--text">{{ work.fields.title }}</span>
+        </div>
+      </v-card-title>
+
+      <v-btn v-for="tag in work.fields.tags"
+             :key="tag.sys.id" class="tag-field">{{ tag.fields.name }}
+      </v-btn>
+
+      <v-card-text>
+        <div class="content" v-html="$md.render(work.fields.content)"></div>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -117,5 +109,12 @@
     color: #fff;
     padding: 5px;
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  .tag-field {
+    margin: 5px;
+  }
 </style>
-<!-- ここまで追加 -->

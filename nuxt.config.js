@@ -1,3 +1,4 @@
+import colors from 'vuetify/es5/util/colors'
 // ここから追加
 const config = require('./.contentful.json')
 const contentful = require('contentful')
@@ -7,19 +8,18 @@ const client = contentful.createClient({
   space: config.CTF_SPACE_ID,
   accessToken: config.CTF_CDA_ACCESS_TOKEN
 })
-// ここまで追加
+
 export default {
   mode: 'universal',
-  // ここから追加
   env: {
     CTF_SPACE_ID: config.CTF_SPACE_ID,
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN
   },
-  // ここまで追加
   /*
   ** Headers of the page
   */
   head: {
+    titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
     meta: [
       {charset: 'utf-8'},
@@ -38,7 +38,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '@fortawesome/fontawesome-svg-core/styles.css' // ここを追加
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '@mdi/font/css/materialdesignicons.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -50,8 +51,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss',
+    '@nuxt/typescript-build',
+    '@nuxtjs/vuetify',
   ],
   /*
   ** Nuxt.js modules
@@ -69,15 +70,39 @@ export default {
     breaks: false
   },
   // ここまで追加
-
-  // ここから追加
-  fontawesome: {
-    component: 'fa'
+  /*
+  ** vuetify module configuration
+  ** https://github.com/nuxt-community/vuetify-module
+  */
+  vuetify: {
+    customVariables: ['~/assets/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        dark: {
+          primary: colors.blue.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+        /*以下追加*/
+        light: {
+          primary: colors.blue.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        }
+      }
+    }
   },
-  // ここまで追加
-  // ここから追加
   generate: {
-    routes () {
+    routes() {
       return Promise.all([
         client.getEntries({
           'content_type': 'work'
@@ -88,7 +113,7 @@ export default {
         client.getEntries({
           'content_type': 'tag'
         })
-      ]).then(([works,categories,tags]) => {
+      ]).then(([works, categories, tags]) => {
         return [
           ...works.items.map(work => `work/${work.fields.slug}`),
           ...categories.items.map(category => `category/${category.fields.slug}`),
@@ -97,8 +122,6 @@ export default {
       })
     }
   },
-  // ここまで追加
-
   /*
   ** Build configuration
   */
