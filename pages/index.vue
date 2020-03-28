@@ -11,8 +11,8 @@
           </v-avatar>
           Naoya Moriguchi
           <v-card-text>
-            バックエンドよりのフロントエンドエンジニアです。。Vue.js,
-            Nuxt.jsが大好きです。Pythonも使います。ご依頼はDMからどうぞ。
+            バックエンドエンジニアですが、Vue.js, Nuxt.jsが大好きです。
+            Python・Javaも使います。
             <v-icon>mdi-github</v-icon>
             <v-icon>mdi-xml</v-icon>
             <v-icon>mdi-twitter</v-icon>

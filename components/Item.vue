@@ -32,7 +32,9 @@
              class="tag-field">{{ tag.fields.name }}
       </v-btn>
     </v-card-actions>
+    <v-card-actions>
     <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
+    </v-card-actions>
   </v-card>
 </template>
 <script>
@@ -67,7 +69,7 @@
                     dataLabels: {
                         formatter(val, opts) {
                             const name = opts.w.globals.labels[opts.seriesIndex]
-                            return [name, val.toFixed(1) + '%']
+                            return [name, val.toFixed(0) + '%']
                         }
                     },
                     legend: {
@@ -76,6 +78,12 @@
 
                 },
 
+            }
+        },
+        created() {
+            if (this.work.fields !== undefined && this.work.fields["tasks"] !== undefined) {
+                this.series = this.work.fields["tasks"].map(x => x.fields.Percentage)
+                this.chartOptions["labels"] = this.work.fields["tasks"].map(x => x.fields.Task)
             }
         }
     }
