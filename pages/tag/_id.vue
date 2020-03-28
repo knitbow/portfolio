@@ -1,11 +1,39 @@
 <!-- ここから追加 -->
 <template>
   <div>
-    <Item
-      v-for="work in works"
-      :key="work.sys.id"
-      :work="work"
-    />
+    <div>
+      <v-row dense>
+        <v-col md="2" xs="12">
+          <v-card flat>
+            <v-chip
+              class="ma-2"
+              color="primary"
+              label
+            >
+              <v-icon left>mdi-code-tags</v-icon>
+              {{works[0].fields.tags[0].fields.name}}
+            </v-chip>
+          </v-card>
+        </v-col>
+        <v-col md="10">
+          <v-row dense>
+            <v-col
+              v-for="work in works"
+              :key="work.sys.id"
+              :cols="12"
+              md="6"
+              xs="12"
+              :work="work"
+            >
+              <Item
+                :key="work.sys.id"
+                :work="work"
+              />
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 <!-- ここまで追加 -->

@@ -4,14 +4,16 @@
     <v-img
       class="white--text align-start"
       :src="work.fields.image.fields.file.url"
+      @click="to_work(work.fields.slug)"
       height="200px"
     >
-      <v-btn
-        class="btn-field"
-        :to=" '/category/'+work.fields.category.sys.id "
+      <v-chip
+        link
+        class="btn-field max-z"
+        @click="to_category(work.fields.category.sys.id)"
         small
       >{{work.fields.category.fields.name}}
-      </v-btn>
+      </v-chip>
     </v-img>
     <v-card-title primary-title>
       <div>
@@ -33,7 +35,7 @@
       </v-btn>
     </v-card-actions>
     <v-card-actions>
-    <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
+      <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
     </v-card-actions>
   </v-card>
 </template>
@@ -74,10 +76,9 @@
                     },
                     legend: {
                         show: false
-                    }
-
+                    },
                 },
-
+                to: "1"
             }
         },
         created() {
@@ -85,7 +86,18 @@
                 this.series = this.work.fields["tasks"].map(x => x.fields.Percentage)
                 this.chartOptions["labels"] = this.work.fields["tasks"].map(x => x.fields.Task)
             }
-        }
+        },
+        methods: {
+            to_work(id) {
+                if (this.to !== "category") {
+                    this.$router.push('/work/' + id)
+                }
+            },
+            to_category(id) {
+                this.$router.push('/category/' + id)
+                this.to = "category"
+            },
+        },
     }
 </script>
 
@@ -100,5 +112,9 @@
 
   .btn-field {
     margin: 10px;
+  }
+
+  .max-z {
+    z-index: 100000000000000000000000
   }
 </style>
