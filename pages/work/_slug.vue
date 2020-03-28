@@ -10,7 +10,7 @@
       <v-card-title primary-title>
         <div>
           <nuxt-link :to=" '/category/'+work.fields.category.sys.id ">
-            <div class="headline">{{ work.fields.category.fields.name
+            <div class="headline black--text">{{ work.fields.category.fields.name
               }}
             </div>
           </nuxt-link>
@@ -18,10 +18,14 @@
         </div>
       </v-card-title>
 
-      <v-btn v-for="tag in work.fields.tags"
-             :key="tag.sys.id" class="tag-field">{{ tag.fields.name }}
+      <v-btn small v-for="tag in work.fields.tags"
+             :key="tag.sys.id" class="tag-field"
+             :to=" '/tag/'+tag.sys.id+'?tag='+tag.fields.name "
+      >{{ tag.fields.name }}
       </v-btn>
-
+      <v-card-actions>
+        <Task :work="work"></Task>
+      </v-card-actions>
       <v-card-text>
         <div class="content" v-html="$md.render(work.fields.content)"></div>
       </v-card-text>
@@ -35,10 +39,18 @@
     import {faLink} from '@fortawesome/free-solid-svg-icons'
     import {faGithub} from '@fortawesome/free-brands-svg-icons'
     import {createClient} from '~/plugins/contentful.js'
+    import Task from "../../components/Task";
     // ここまで追加
     const client = createClient()
     export default {
-        asyncData(params) {
+        components: {Task},
+        asyncData({params, payload}) {
+
+            // payloadのデータがあれば、そちらから取得する
+            if (payload) {
+                return {works: payload}
+            }
+
             return Promise.all([
                 client.getEntries({
                     'content_type': 'work',

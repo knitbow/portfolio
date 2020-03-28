@@ -11,7 +11,7 @@
               label
             >
               <v-icon left>mdi-code-tags</v-icon>
-              {{works[0].fields.tags[0].fields.name}}
+              {{ $route.query.tag }}
             </v-chip>
           </v-card>
         </v-col>
