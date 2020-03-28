@@ -30,8 +30,9 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-
-      <v-toolbar-title v-text="title" />
+      <nuxt-link :to=" '/'">
+        <v-toolbar-title v-text="title" class="info--text"/>
+      </nuxt-link>
       <v-spacer />
     </v-app-bar>
     <v-content>

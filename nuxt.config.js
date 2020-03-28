@@ -45,7 +45,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~plugins/font-awesome', ssr: false} // ここを追加
+    {src: '~plugins/font-awesome', ssr: false}, // ここを追加
+    {src: '@/plugins/vue-apexcharts', ssr: false},
   ],
   /*
   ** Nuxt.js dev-modules

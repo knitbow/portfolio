@@ -25,18 +25,45 @@
         <span class="grey--text">{{ work.fields.subTitle }}</span>
       </div>
     </v-card-subtitle>
-
-    <v-btn x-small v-for="tag in work.fields.tags"
-           :key="tag.sys.id" class="tag-field">{{ tag.fields.name }}
-    </v-btn>
-
+    <v-card-actions>
+      <v-btn x-small v-for="tag in work.fields.tags"
+             :to=" '/tag/'+tag.sys.id "
+             :key="tag.sys.id"
+             class="tag-field">{{ tag.fields.name }}
+      </v-btn>
+    </v-card-actions>
+    <apexchart type="pie" width="300" :options="chartOptions" :series="series"></apexchart>
   </v-card>
-
 </template>
 <script>
+
     export default {
         name: "Item",
-        props: ['work']
+        props: ['work'],
+        data() {
+            return {
+                series: [44, 55, 13, 43, 22],
+                chartOptions: {
+                    chart: {
+                        width: 380,
+                        type: 'pie',
+                    },
+                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 200
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }]
+                },
+
+            }
+        }
     }
 </script>
 
