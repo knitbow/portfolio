@@ -114,22 +114,12 @@ export default {
         }),
         client.getEntries({
           'content_type': 'tag'
-        }),
+        })
       ]).then(([works, categories, tags]) => {
-
         return [
-          {
-            route: works.items.map(work => `work/${work.fields.slug}`),
-            payload: works
-          },
-          {
-            route: categories.items.map(category => `category/${category.sys.id}`),
-            payload: categories
-          },
-          {
-            route: tags.items.map(tag => `tag/${tag.sys.id}`),
-            payload: tags
-          }
+          ...works.items.map(work => `work/${work.fields.slug}`),
+          ...categories.items.map(category => `category/${category.sys.id}`),
+          ...tags.items.map(tag => `tag/${tag.sys.id}`)
         ]
       })
     }
