@@ -32,7 +32,7 @@
              class="tag-field">{{ tag.fields.name }}
       </v-btn>
     </v-card-actions>
-    <apexchart type="pie" width="300" :options="chartOptions" :series="series"></apexchart>
+    <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
   </v-card>
 </template>
 <script>
@@ -45,21 +45,35 @@
                 series: [44, 55, 13, 43, 22],
                 chartOptions: {
                     chart: {
-                        width: 380,
+                        width: '100%',
                         type: 'pie',
                     },
                     labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                width: 200
-                            },
-                            legend: {
-                                position: 'bottom'
+                    theme: {
+                        monochrome: {
+                            enabled: true
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            dataLabels: {
+                                offset: -5
                             }
                         }
-                    }]
+                    },
+                    title: {
+                        text: "Task"
+                    },
+                    dataLabels: {
+                        formatter(val, opts) {
+                            const name = opts.w.globals.labels[opts.seriesIndex]
+                            return [name, val.toFixed(1) + '%']
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+
                 },
 
             }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row dense>
-      <v-col md="2">
+      <v-col md="2" xs="12">
         <v-card flat>
           <v-avatar>
             <v-img
@@ -32,7 +32,9 @@
           <v-col
             v-for="work in works"
             :key="work.sys.id"
-            :cols="6"
+            :cols="12"
+            md="6"
+            xs="12"
             :work="work"
           >
             <Item

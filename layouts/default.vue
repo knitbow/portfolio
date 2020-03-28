@@ -44,7 +44,7 @@
       :fixed="fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }} </span>
     </v-footer>
   </v-app>
 </template>
