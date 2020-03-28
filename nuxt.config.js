@@ -1,20 +1,33 @@
 import colors from 'vuetify/es5/util/colors'
-// ここから追加
-const config = require('./.contentful.json')
-const contentful = require('contentful')
-// ここまで追加
-// ここから追加
-const client = contentful.createClient({
-  space: config.CTF_SPACE_ID,
-  accessToken: config.CTF_CDA_ACCESS_TOKEN
-})
+import {createClient} from './plugins/contentful.js'
+// https://qiita.com/isihigameKoudai/items/3e45ade7c438176a4cc9
+// // ここから追加
+// const config = require('./.contentful.json')
+// const contentful = require('contentful')
+// // ここまで追加
+// // ここから追加
+// const client = contentful.createClient({
+//   space: config.CTF_SPACE_ID,
+//   accessToken: config.CTF_CDA_ACCESS_TOKEN
+// })
+// let envSet = {}
+// const environment = process.env.NODE_ENV || 'development'
+// if (environment !== 'production') {
+//   envSet = require(`./env.${environment}.js`)
+// }
+
+const pkg = require('./package')
+const {getConfigForKeys} = require('./lib/config.js')
+const ctfConfig = getConfigForKeys([
+  'CTF_SPACE_ID',
+  'CTF_CDA_ACCESS_TOKEN'
+])
+
+const {createClient} = require('./plugins/contentful')
+const cdaClient = createClient(ctfConfig)
 
 export default {
   mode: 'universal',
-  env: {
-    CTF_SPACE_ID: config.CTF_SPACE_ID,
-    CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN
-  },
   /*
   ** Headers of the page
   */
@@ -106,13 +119,13 @@ export default {
   generate: {
     routes() {
       return Promise.all([
-        client.getEntries({
+        cdaClient.getEntries({
           'content_type': 'work'
         }),
-        client.getEntries({
+        cdaClient.getEntries({
           'content_type': 'category'
         }),
-        client.getEntries({
+        cdaClient.getEntries({
           'content_type': 'tag'
         })
       ]).then(([works, categories, tags]) => {
@@ -123,6 +136,10 @@ export default {
         ]
       })
     }
+  },
+  env: {
+    CTF_SPACE_ID: ctfConfig.CTF_SPACE_ID,
+    CTF_CDA_ACCESS_TOKEN: ctfConfig.CTF_CDA_ACCESS_TOKEN,
   },
   /*
   ** Build configuration
