@@ -12,7 +12,7 @@
           Naoya Moriguchi
           <v-card-text>
             バックエンドエンジニアですが、Vue.js, Nuxt.jsが大好きです。
-            Python・Java・PHPも使います。
+            Python・Java・PHPを使います。
             <v-icon>mdi-github</v-icon>
             <v-icon>mdi-xml</v-icon>
             <v-icon>mdi-twitter</v-icon>
