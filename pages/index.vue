@@ -5,7 +5,7 @@
         <v-card flat>
           <v-avatar>
             <v-img
-              :src="works[0].fields.image.fields.file.url"
+              src="https://images.ctfassets.net/0qyl5vkqyxwv/01C2KhFuFP6AvXIyZh16MD/74c3eacfc44ef9c63232390899ede3ed/ryu.png"
             >
             </v-img>
           </v-avatar>

@@ -5,7 +5,7 @@
       class="white--text align-start"
       :src="work.fields.image.fields.file.url"
       @click="to_work(work.fields.slug)"
-      height="200px"
+      height="300px"
     >
       <v-chip
         link
