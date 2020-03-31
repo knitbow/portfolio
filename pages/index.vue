@@ -12,7 +12,7 @@
           Naoya Moriguchi
           <v-card-text>
             バックエンドエンジニアですが、Vue.js, Nuxt.jsが大好きです。
-            Python・Java・PHPを使います。このサイトはNuxtで作っています。お仕事依頼・お問い合わせはContactからお願いします。
+            Python・Java・PHPを使います。お仕事依頼・お問い合わせはContactからお願いします。
           </v-card-text>
           <v-card-actions>
             <v-text-field
@@ -87,7 +87,7 @@
             return {
                 keyword: "",
                 snackbar: false,
-                text: 'ありがとうございます。メール送信が成功しました。',
+                text: 'ありがとうございます。確認後、連絡させていただきます。',
                 timeout: 5000,
             }
         },
