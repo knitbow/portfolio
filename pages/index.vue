@@ -12,10 +12,7 @@
           Naoya Moriguchi
           <v-card-text>
             バックエンドエンジニアですが、Vue.js, Nuxt.jsが大好きです。
-            Python・Java・PHPを使います。
-            <v-icon>mdi-github</v-icon>
-            <v-icon>mdi-xml</v-icon>
-            <v-icon>mdi-twitter</v-icon>
+            Python・Java・PHPを使います。このサイトはNuxtで作っています。お仕事依頼・お問い合わせはContactからお願いします。
           </v-card-text>
           <v-card-actions>
             <v-text-field
@@ -43,6 +40,44 @@
             />
           </v-col>
         </v-row>
+        <client-only>
+          <v-form netlify>
+            <input type="hidden" name="form-name" value="contact">
+            <v-card>
+              <v-container fluid>
+                <v-card-title>
+                  Contact Form
+                </v-card-title>
+                <v-card-text>
+                  <v-text-field
+                    label="Name"
+                    placeholder="山田 太郎"
+                    outlined
+                    dense
+                    name="name"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Email"
+                    placeholder="yamada@example.co.jp"
+                    outlined
+                    dense
+                    name="email"
+                  ></v-text-field>
+                  <v-textarea
+                    label="Message"
+                    placeholder="message"
+                    outlined
+                    dense
+                    name="message"
+                  ></v-textarea>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn depressed small type="submit" color="primary">send message</v-btn>
+                </v-card-actions>
+              </v-container>
+            </v-card>
+          </v-form>
+        </client-only>
       </v-col>
     </v-row>
   </div>
@@ -76,3 +111,10 @@
         },
     }
 </script>
+
+<style lang="scss" scoped>
+  a {
+    text-decoration: none;
+  }
+
+</style>

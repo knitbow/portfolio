@@ -19,7 +19,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.title"/>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -29,55 +29,69 @@
       fixed
       app
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
       <nuxt-link :to=" '/'">
         <v-toolbar-title v-text="title" class="info--text"/>
       </nuxt-link>
-      <v-spacer />
+      <v-spacer/>
     </v-app-bar>
     <v-content>
       <v-container>
-        <nuxt />
+        <nuxt/>
       </v-container>
     </v-content>
     <v-footer
       :fixed="fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }} </span>
+      <v-layout justify-center>
+        <span>&copy; {{ new Date().getFullYear() }} </span>
+        <a href="https://github.com/knitbow/">
+          <v-icon>mdi-github</v-icon>
+        </a>
+        <a href="https://twitter.com/nit_bow">
+          <v-icon>mdi-twitter</v-icon>
+        </a>
+        <a href="https://www.facebook.com/naoya.moriguchi">
+          <v-icon>mdi-facebook</v-icon>
+        </a>
+        <a href="https://www.instagram.com/knitbow/">
+          <v-icon>mdi-instagram</v-icon>
+        </a>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Home',
-          to: '/'
-        },
-        {
-          icon: 'mdi-shape-outline',
-          title: 'Category',
-          to: '/category'
-        },
-        {
-          icon: 'mdi-code-tags',
-          title: 'Code Tag',
-          to: '/tag'
+    export default {
+        data() {
+            return {
+                clipped: false,
+                drawer: false,
+                fixed: false,
+                items: [
+                    {
+                        icon: 'mdi-apps',
+                        title: 'Home',
+                        to: '/'
+                    },
+                    {
+                        icon: 'mdi-shape-outline',
+                        title: 'Category',
+                        to: '/category'
+                    },
+                    {
+                        icon: 'mdi-code-tags',
+                        title: 'Code Tag',
+                        to: '/tag'
+                    }
+                ],
+                miniVariant: false,
+                right: true,
+                rightDrawer: false,
+                title: 'Portfolio'
+            }
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Portfolio'
     }
-  }
-}
 </script>

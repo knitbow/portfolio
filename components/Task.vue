@@ -1,5 +1,5 @@
 <template>
-      <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
+  <apexchart type="pie" width="350" :options="chartOptions" :series="series"></apexchart>
 </template>
 <script>
 
@@ -16,9 +16,14 @@
                     },
                     labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
                     theme: {
+                        mode: 'light',
+                        palette: 'palette5',
                         monochrome: {
-                            enabled: true
-                        }
+                            enabled: false,
+                            color: '#EEEEEE',
+                            shadeTo: 'light',
+                            shadeIntensity: 1.9
+                        },
                     },
                     plotOptions: {
                         pie: {
@@ -27,6 +32,7 @@
                             }
                         }
                     },
+
                     title: {
                         text: "Task"
                     },
@@ -64,7 +70,5 @@
     margin: 10px;
   }
 
-  .max-z {
-    z-index: 100000000000000000000000
-  }
+
 </style>

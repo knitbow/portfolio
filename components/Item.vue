@@ -34,9 +34,11 @@
              class="tag-field">{{ tag.fields.name }}
       </v-btn>
     </v-card-actions>
-    <v-card-actions>
-      <Task :work="work"></Task>
-    </v-card-actions>
+    <v-card flat>
+      <v-layout justify-center>
+        <Task :work="work"></Task>
+      </v-layout>
+    </v-card>
   </v-card>
 </template>
 <script>
