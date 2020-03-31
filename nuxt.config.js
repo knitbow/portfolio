@@ -57,6 +57,7 @@ export default {
   */
   modules: [
     // '@nuxtjs/pwa',
+    '@nuxtjs/axios',
     '@nuxtjs/markdownit',
     'nuxt-fontawesome'
   ],
