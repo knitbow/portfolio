@@ -87,8 +87,8 @@
             return {
                 keyword: "",
                 snackbar: false,
-                text: 'メッセージを送信しました。',
-                timeout: 3000,
+                text: 'ありがとうございます。メール送信が成功しました。',
+                timeout: 5000,
             }
         },
     }

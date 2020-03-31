@@ -4,8 +4,8 @@
       <v-card-title>
         Contact Form
       </v-card-title>
-      <v-card-text>
-        <v-form method="post" netlify name="contact" data-netlify="true">
+      <v-form name="contact" method="post" netlify @submit.prevent data-netlify="true">
+        <v-card-text>
           <v-text-field
             v-show="false"
             v-model="title"
@@ -39,11 +39,9 @@
             label="お問い合わせ内容"
             required
           />
-          <v-btn :disabled="isEmpty" type="submit" color="primary" @click="$parent.$data.snackbar = true" small>
-            send message
-          </v-btn>
-        </v-form>
-      </v-card-text>
+          <v-btn :disabled="isEmpty" type="submit" color="primary" @click="submit" small>send message</v-btn>
+        </v-card-text>
+      </v-form>
     </v-container>
   </v-card>
 
@@ -59,6 +57,7 @@
                 email: "",
                 company: "",
                 message: "",
+                botfield: "",
             }
         },
         computed: {
@@ -68,5 +67,23 @@
                     this.message !== '');
             }
         },
+        methods: {
+            async submit() {
+                const params = new FormData()
+                //以下、ダミーフォームの各フォーム要素のnameと合わせる
+                params.append('form-name', 'contact')
+                params.append('name', this.name)
+                params.append('email', this.email)
+                params.append('company', this.company)
+                params.append('message', this.message)
+                params.append('bot-field', this.botfield)
+
+                const response = await this.$axios.$post(window.location.origin, params)
+                //実際はresponseを使って画面側にフィードバックさせるが、ここでは仮にconsoleに出力
+                console.log(response)
+                this.$parent.$data.snackbar = true
+            },
+        },
     }
 </script>
+
