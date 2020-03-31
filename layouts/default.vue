@@ -40,26 +40,32 @@
         <nuxt/>
       </v-container>
     </v-content>
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <v-layout justify-center>
-        <span>&copy; {{ new Date().getFullYear() }} </span>
-        <a href="https://github.com/knitbow/">
-          <v-icon>mdi-github</v-icon>
-        </a>
-        <a href="https://twitter.com/nit_bow">
-          <v-icon>mdi-twitter</v-icon>
-        </a>
-        <a href="https://www.facebook.com/naoya.moriguchi">
-          <v-icon>mdi-facebook</v-icon>
-        </a>
-        <a href="https://www.instagram.com/knitbow/">
-          <v-icon>mdi-instagram</v-icon>
-        </a>
-      </v-layout>
-    </v-footer>
+    <v-card flat>
+      <v-footer
+        :fixed="fixed"
+        app
+      >
+        <v-layout justify-center>
+          <v-card-text>
+            &copy; {{ new Date().getFullYear() }} このサイトはNuxtで作成しています
+          </v-card-text>
+          <v-card-text>
+            <a href="https://github.com/knitbow/">
+              <v-icon>mdi-github</v-icon>
+            </a>
+            <a href="https://twitter.com/nit_bow">
+              <v-icon>mdi-twitter</v-icon>
+            </a>
+            <a href="https://www.facebook.com/naoya.moriguchi">
+              <v-icon>mdi-facebook</v-icon>
+            </a>
+            <a href="https://www.instagram.com/knitbow/">
+              <v-icon>mdi-instagram</v-icon>
+            </a>
+          </v-card-text>
+        </v-layout>
+      </v-footer>
+    </v-card>
   </v-app>
 </template>
 
