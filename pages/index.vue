@@ -40,46 +40,24 @@
             />
           </v-col>
         </v-row>
-        <client-only>
-          <v-form netlify>
-            <input type="hidden" name="form-name" value="contact">
-            <v-card>
-              <v-container fluid>
-                <v-card-title>
-                  Contact Form
-                </v-card-title>
-                <v-card-text>
-                  <v-text-field
-                    label="Name"
-                    placeholder="山田 太郎"
-                    outlined
-                    dense
-                    name="name"
-                  ></v-text-field>
-                  <v-text-field
-                    label="Email"
-                    placeholder="yamada@example.co.jp"
-                    outlined
-                    dense
-                    name="email"
-                  ></v-text-field>
-                  <v-textarea
-                    label="Message"
-                    placeholder="message"
-                    outlined
-                    dense
-                    name="message"
-                  ></v-textarea>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn depressed small type="submit" color="primary">send message</v-btn>
-                </v-card-actions>
-              </v-container>
-            </v-card>
-          </v-form>
-        </client-only>
+        <Contact></Contact>
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="timeout"
+      >
+        {{ text }}
+        <v-btn
+          color="blue"
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+    </div>
   </div>
 </template>
 
@@ -87,10 +65,11 @@
 
     import {createClient} from '../plugins/contentful.js'
     import Item from "../components/Item";
+    import Contact from "../components/contact";
 
     const client = createClient()
     export default {
-        components: {Item},
+        components: {Contact, Item},
 
         asyncData() {
             return Promise.all([
@@ -107,6 +86,9 @@
         data() {
             return {
                 keyword: "",
+                snackbar: false,
+                text: 'メッセージを送信しました。',
+                timeout: 3000,
             }
         },
     }
