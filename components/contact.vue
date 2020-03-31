@@ -15,6 +15,7 @@
           <v-text-field
             v-model="name"
             label="お名前"
+            name="name"
             dense
             outlined
             required
@@ -22,6 +23,7 @@
           <v-text-field
             outlined
             dense
+            name="email"
             v-model="email"
             label="メールアドレス"
             required
@@ -30,11 +32,13 @@
             outlined
             dense
             v-model="company"
+            name="company"
             label="会社名（法人の方のみ）"
           />
           <v-textarea
             outlined
             dense
+            name="message"
             v-model="message"
             label="お問い合わせ内容"
             required
@@ -57,7 +61,7 @@
                 email: "",
                 company: "",
                 message: "",
-                botfield: "",
+                botfield: "bot",
             }
         },
         computed: {
