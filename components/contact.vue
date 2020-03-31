@@ -5,7 +5,7 @@
         Contact Form
       </v-card-title>
       <v-card-text>
-        <v-form method="post" netlify @submit.prevent>
+        <v-form method="post" netlify>
           <v-text-field
             v-show="false"
             v-model="title"
@@ -38,7 +38,9 @@
             label="お問い合わせ内容"
             required
           />
-          <v-btn :disabled="isEmpty" type="submit" color="primary" @click="submit" small>send message</v-btn>
+          <v-btn :disabled="isEmpty" type="submit" color="primary" @click="$parent.$data.snackbar = true" small>
+            send message
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-container>
@@ -64,11 +66,6 @@
                     this.email !== '' &&
                     this.message !== '');
             }
-        },
-        methods: {
-            async submit() {
-                this.$parent.$data.snackbar = true
-            },
         },
     }
 </script>
