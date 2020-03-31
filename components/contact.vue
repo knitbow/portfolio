@@ -5,11 +5,12 @@
         Contact Form
       </v-card-title>
       <v-card-text>
-        <v-form method="post" netlify>
+        <v-form method="post" netlify name="contact" data-netlify="true">
           <v-text-field
             v-show="false"
             v-model="title"
             name="form-name"
+            value="contact"
           />
           <v-text-field
             v-model="name"
