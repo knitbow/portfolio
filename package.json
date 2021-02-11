@@ -20,7 +20,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/markdownit": "^1.2.9",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "apexcharts": "^3.17.0",
+    "apexcharts": "^3.24.0",
     "contentful": "^7.14.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
